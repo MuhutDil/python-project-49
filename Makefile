@@ -10,5 +10,7 @@ package-install:
 package-install-force:
 	uv tool install --force dist/*.whl
 
+build-package: build package-install-force
+
 brain-games:
 	uv run brain-games
