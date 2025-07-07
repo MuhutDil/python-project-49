@@ -28,7 +28,7 @@ def endind_game(name, status_game, *, answer_data):
 
 
 def generate_question():
-    return random.randint(1, 100)
+    return random.randint(1, 100) #NOSONAR
 
 
 def is_even(num):
