@@ -1,8 +1,15 @@
-from brain_games.games.even import game_even
+from brain_games.game_basis import game
+from brain_games.games.even import (
+    answer_to_question,
+    generate_question,
+    rule,
+)
 
 
 def main():
-    game_even()
+    game(rule=rule,
+         generate_question=generate_question,
+         answer_to_question=answer_to_question)
 
 
 if __name__ == "__main__":
