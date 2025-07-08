@@ -5,11 +5,11 @@ def rule():
     print('What is the result of the expression?')
 
 
-def generate_question():  # NOSONAR
+def generate_question():
     operators = ('+', '-', '*')
-    first_num = random.randint(1, 50)
-    second_num = random.randint(1, 50)
-    operator = random.choice(operators)
+    first_num = random.randint(1, 50)  # NOSONAR
+    second_num = random.randint(1, 50)  # NOSONAR
+    operator = random.choice(operators)  # NOSONAR
     return f'{first_num} {operator} {second_num}'
 
 
