@@ -10,6 +10,11 @@ def welcome_user():
     return name
 
 
+def ask_question(question):
+    print(f'Question: {question}')
+    return prompt.string('Your answer: ')
+
+
 def endind_game(name, status_game, *, answer_data):
     if status_game:
         print(f'Congratulations, {name}!')
@@ -29,11 +34,9 @@ def game(rule, generate_question, answer_to_question):
     right_answer_data = {}
     while count_right_answer < LIMIT_ANSWERS:
         question = generate_question()
-        print(f'Question: {question}')
-        user_answer = prompt.string('Your answer: ')
-        correct_answer = answer_to_question(question)
-        right_answer = (correct_answer == user_answer)
-        if right_answer:
+        user_answer = ask_question(question)
+        correct_answer = answer_to_question()
+        if correct_answer == user_answer:
             count_right_answer += 1
         else:
             status_game = False

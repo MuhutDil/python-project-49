@@ -26,5 +26,5 @@ def generate_question():
     return ' '.join(map(str, progression))
 
 
-def answer_to_question(question):
+def answer_to_question():
     return str(ANSWER)
