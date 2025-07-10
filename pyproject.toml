@@ -3,7 +3,8 @@ name = "hexlet-code"
 version = "0.1.0"
 description = "Set of five command-line controlled mathematical games"
 authors = [
-    {name = "MuhutDil", github = "https://github.com/MuhutDil"]
+    {name = "MuhutDil", github = "https://github.com/MuhutDil"}
+    ]
 readme = "README.md"
 requires-python = ">=3.10.12"
 dependencies = [
