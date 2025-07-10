@@ -23,30 +23,30 @@ The application architecture allows you to connect many games. Now, five games a
  
 ### Download
     uv tool install https://github.com/MuhutDil/python-project-49.git
-or
+or \
     git clone https://github.com/MuhutDil/python-project-49.git
  
 #### Start commands
 - brain-even
-- brain-calc:
-- brain-gcd:
-- brain-progression:
-- brain-prime:
+- brain-calc
+- brain-gcd
+- brain-progression
+- brain-prime
 
 ### Below are examples of installing and launching games.
 
-Install and brain-even 
+#### Install and brain-even 
 [![asciicast](https://asciinema.org/a/727092.svg)](https://asciinema.org/a/727092)
 
-brain-calc
+#### brain-calc
 [![asciicast](https://asciinema.org/a/727094.svg)](https://asciinema.org/a/727094)
 
-brain-gcd
+#### brain-gcd
 [![asciicast](https://asciinema.org/a/727095.svg)](https://asciinema.org/a/727095)
 
-brain-progression
+#### brain-progression
 [![asciicast](https://asciinema.org/a/727096.svg)](https://asciinema.org/a/727096)
 
-brain-prime
+#### brain-prime
 [![asciicast](https://asciinema.org/a/727097.svg)](https://asciinema.org/a/727097)
  
