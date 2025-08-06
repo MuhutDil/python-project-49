@@ -1,64 +1,45 @@
-"""Math Expression Generator Module.
+"""Arithmetic Expression Game Module.
  
-This module generates simple arithmetic expression questions and
-calculates their answers.
-It's designed to be used in quiz/game systems where users need
-to solve math problems.
+This module provides functionality for generating simple
+math expression questions and calculating their 
+correct answers. It supports three basic operations:
+addition (+), subtraction (-), and multiplication (*).
  
-The module provides:
-- Question generation with random numbers and operators
-- Answer calculation
-- Consistent storage of the correct answer between 
-  question generation and answer checking
- 
-Example usage:
-    >>> rule()
-    What is the result of the expression?
-    >>> question = generate_question()
-    >>> print(question)
-    15 * 3
-    >>> answer = answer_to_question()
-    >>> print(answer)
-    45
- 
-Global Variables:
-    ANSWER (int|None): 
-        Stores the correct answer to the last generated question.
-        Initialized as None and updated when generating questions.
- 
-Functions:
-    rule(): Displays the game instructions.
-    generate_question(): Generates a random math expression question.
-    transform_math_expression(first_num, operator, second_num):
-        Calculates expression result.
-    answer_to_question(): Returns the correct answer
-        to the last generated question.
+The main interface is question_and_answer() which returns a tuple containing:
+- A string math expression (e.g., "3 + 5")
+- The correct answer as a string (e.g., "8")
 """
 import random
 
-ANSWER = None
+RULE = 'What is the result of the expression?'
 
 
-def rule():
-    """Prints the game rule/instruction.
+def question_and_answer():
+    """Generate a random arithmetic question and its correct answer.
     
-    The instruction explains what the user
-    should do with the generated questions.
-    """
-    print('What is the result of the expression?')
-
-
-def transform_math_expression(first_num, operator, second_num):
-    """Calculates the result of a math expression.
-    
-    Args:
-        first_num (int): The first operand
-        operator (str): The arithmetic operator (+, -, *)
-        second_num (int): The second operand
+    Coordinates the question generation and answer calculation process.
     
     Returns:
-        int: The result of the arithmetic operation
+        tuple: (question, answer) where:
+            - question (str): Formatted math expression (e.g., "4 * 7")
+            - answer (str): String representation of the correct result
     """
+    question = generate_question()
+    correct_answer = answer_to_question(question)
+    return question, correct_answer
+
+
+def calculate_math_expression(expression):
+    """Evaluate a mathematical expression string.
+    
+    Args:
+        expression (str): Math expression in format "num op num" (e.g., "5 + 3")
+        
+    Returns:
+        int: Calculated result of the expression
+    """
+    first_num, operator, second_num = expression.split()
+    first_num, second_num = int(first_num), int(second_num)
     match operator:
         case '+':
             return first_num + second_num
@@ -69,30 +50,29 @@ def transform_math_expression(first_num, operator, second_num):
 
 
 def generate_question():
-    """Generates a random arithmetic expression question.
+    """Generate a random arithmetic expression.
     
     Randomly selects:
-    - Two integers between 1 and 50
-    - One operator from +, -, *
-    
-    Stores the correct answer in the global ANSWER variable.
+    - Two integers between 1 and 50 (inclusive)
+    - One operator from '+', '-', '*'
     
     Returns:
-        str: The generated math expression as a string (e.g., "5 + 3")
+        str: Formatted expression string (e.g., "15 * 3")
     """
     operators = ('+', '-', '*')
     first_num = random.randint(1, 50)  # NOSONAR
     second_num = random.randint(1, 50)  # NOSONAR
     operator = random.choice(operators)  # NOSONAR
-    global ANSWER
-    ANSWER = transform_math_expression(first_num, operator, second_num)
     return f'{first_num} {operator} {second_num}'
 
 
-def answer_to_question():
-    """Provides the correct answer to the last generated question.
+def answer_to_question(question):
+    """Convert a math question to its string answer.
     
+    Args:
+        question (str): Math expression to evaluate
+        
     Returns:
-        str: The string representation of the stored answer
+        str: String representation of the answer
     """
-    return str(ANSWER)
+    return str(calculate_math_expression(question))

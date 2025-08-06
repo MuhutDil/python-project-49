@@ -1,59 +1,45 @@
-"""Prime Number Checker Module.
+"""Prime Number Identification Game Module.
  
-This module generates random numbers and checks their primality. 
-It's designed for quiz systems where users
-need to determine if a number is prime.
- 
-The module provides:
-- Random number generation (1-100)
-- Primality checking
-- Consistent answer storage between question generation and verification
- 
-Global Variables:
-    ANSWER (int|None): Stores the last generated number. Initialized as None.
- 
-Functions:
-    rule(): Prints the game instructions.
-    generate_question(): Generates a random number question.
-    is_prime(num): Checks if a number is prime.
-    answer_to_question(): Returns the correct answer ('yes' or 'no').
+This module provides functionality for a game that tests players' ability to
+identify prime numbers between 1 and 100. It generates random numbers and
+determines whether they are prime, returning the correct 'yes' or 'no' answer.
 """
 import random
 
-ANSWER = None
+RULE = 'Answer "yes" if given number is prime. Otherwise answer "no".'
 
 
-def rule():
-    """Prints the game instructions.
+def question_and_answer():
+    """Generate a prime number identification question and its correct answer.
     
-    Explains to the user what they should determine about the number.
+    Returns:
+        tuple: (question, answer) where:
+            - question (int): A randomly generated number between 1-100
+            - answer (str): 'yes' if prime, 'no' if not prime
     """
-    print('Answer "yes" if given number is prime. Otherwise answer "no".')
+    question = generate_question()
+    correct_answer = answer_to_question(question)
+    return question, correct_answer
 
 
 def generate_question():
-    """Generates a random number question.
-    
-    Generates a random integer between 1 and 100
-    and stores it in the global ANSWER.
+    """Generate a random number for prime checking.
     
     Returns:
-        int: The generated number
+        int: Random integer between 1 and 100 (inclusive)
     """
     num = random.randint(1, 100)  # NOSONAR
-    global ANSWER
-    ANSWER = num
     return num
 
 
 def is_prime(num):
-    """Determines if a number is prime.
+    """Check if a number is prime.
     
     Args:
-        num (int): The number to check (1 <= num <= 100)
-    
+        num (int): Number to check
+        
     Returns:
-        bool: True if the number is prime, False otherwise
+        bool: True if prime, False otherwise
     """
     if num == 2:
         return True
@@ -66,10 +52,13 @@ def is_prime(num):
     return True
 
 
-def answer_to_question():
-    """Provides the correct answer to the last generated question.
+def answer_to_question(question):
+    """Convert prime check result to game answer format.
     
+    Args:
+        question (int): The number to evaluate
+        
     Returns:
-        str: 'yes' if the number is prime, 'no' otherwise
+        str: 'yes' if prime, 'no' if not prime
     """
-    return {True: 'yes', False: 'no'}[is_prime(ANSWER)]
+    return {True: 'yes', False: 'no'}[is_prime(question)]

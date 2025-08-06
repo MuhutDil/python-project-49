@@ -1,74 +1,54 @@
-"""Arithmetic Progression Quiz Module.
+"""Arithmetic progression game module.
  
-This module generates arithmetic progressions with hidden elements
-and tests the user's ability to identify the missing number.
-It handles the full quiz cycle from question
-generation to answer verification.
- 
-Global Variables:
-    ANSWER (int|None):
-        Stores the hidden number from the last generated progression.
- 
-Functions:
-    rule(): Displays game instructions.
-    generate_progression(): Creates a random arithmetic progression.
-    generate_question(): Prepares a quiz question with hidden element.
-    answer_to_question(): Reveals the correct answer.
+This module generates questions about missing elements
+in arithmetic progressions for use in math quiz games.
+It provides functionality to:
+- Generate random arithmetic progressions
+- Hide a random element in the progression
+- Format the question and provide the correct answer
 """
 import random
 
-ANSWER = None
+RULE = 'What number is missing in the progression?'
 
 
-def rule():
-    """Prints the game instructions.
-    
-    Explains what the user should determine about the progression.
+def question_and_answer():
+    """Generates a question about a missing progression element and its answer.
+ 
+    Returns:
+        tuple[str, str]: A tuple containing:
+            - question: The progression with one element replaced by '..'
+            - answer: The correct missing element as a string
     """
-    print('What number is missing in the progression?')
+    progression = generate_progression()
+    hidden_index = random.randint(1, len(progression) - 1)
+    hidden_element = progression[hidden_index]
+    question = get_progression_string(progression, hidden_index)
+    return question, str(hidden_element)
 
 
 def generate_progression():
-    """Generates a random arithmetic progression.
-    
-    Creates a sequence of numbers with
-    constant difference to the preceding term.
-    
+    """Generates an arithmetic progression sequence.
+
     Returns:
-        list: The generated progression as a list of integers
+        list[int]: Generated arithmetic progression
     """
-    progression = []
     start = random.randint(1, 100)  # NOSONAR
     step = random.randint(1, 10)  # NOSONAR
     len_progression = random.randint(5, 10)  # NOSONAR
-    for i in range(len_progression):
-        progression.append(start + step * i)
-    return progression
+    return [start + step * i for i in range(len_progression)]
 
 
-def generate_question():
-    """Creates a quiz question with hidden element.
-    
-    1. Generates a progression
-    2. Selects random element to hide
-    3. Stores the hidden value in ANSWER
-    4. Formats the progression with placeholder
-    
+def get_progression_string(progression, hide_index):
+    """Formats a progression as a string with one hidden element.
+ 
+    Args:
+        progression (list[int]): Arithmetic progression to format
+        hide_index (int): Index of element to hide (0-based)
+ 
     Returns:
-        str: The progression with one element replaced by '..'
+        str: Space-separated string representation
+        with hidden element marked as '..'
     """
-    progression = generate_progression()
-    hiden_index = random.randint(1, len(progression) - 1)  # NOSONAR
-    global ANSWER
-    ANSWER = progression[hiden_index]
-    progression[hiden_index] = '..'
+    progression[hide_index] = '..'
     return ' '.join(map(str, progression))
-
-
-def answer_to_question():
-    """Provides the correct hidden number.
-    
-    Returns:
-        str: String representation of the hidden number
-    """
-    return str(ANSWER)

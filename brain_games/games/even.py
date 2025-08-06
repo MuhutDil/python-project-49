@@ -1,48 +1,43 @@
-"""Even Number Checker Module.
+"""Even/Odd Number Game Module.
  
-This module generates random numbers and checks whether they are even or odd.
-It's designed for quiz systems where users
-need to determine if a number is even.
+This module provides functionality for a simple game where users must determine
+whether a randomly generated number is even or odd. It includes functions to:
+- Generate random numbers
+- Check even/odd status
+- Format game responses
  
-The module provides:
-- Random number generation (1-100)
-- Even/odd checking
-- Consistent answer storage between question generation and verification
- 
-Global Variables:
-    ANSWER (int|None): Stores the last generated number. Initialized as None.
- 
-Functions:
-    rule(): Prints the game instructions.
-    generate_question(): Generates a random number question.
-    is_even(num): Checks if a number is even.
-    answer_to_question(): Returns the correct answer ('yes' or 'no').
+The main interface is the question_and_answer() function which returns a tuple
+of (question_number, correct_answer).
 """
 import random
 
-ANSWER = None
+RULE = 'Answer "yes" if the number is even, otherwise answer "no".'
 
 
-def rule():
-    """Prints the game instructions.
+def question_and_answer():
+    """Generate a random number question and its correct answer.
     
-    Explains to the user what they should do with the generated numbers.
+    This is the main game function that coordinates:
+    1. Question generation
+    2. Answer determination
+    
+    Returns:
+        tuple: A (question, answer) pair where:
+            - question (int): Random number between 1-100
+            - answer (str): 'yes' if even, 'no' if odd
     """
-    print('Answer "yes" if the number is even, otherwise answer "no".')
+    question = generate_question()
+    correct_answer = answer_to_question(question)
+    return question, correct_answer
 
 
 def generate_question():
-    """Generates a random number question.
-    
-    Generates a random integer between 1 and 100
-    and stores it in the global ANSWER.
+    """Generate a random integer question between 1 and 100.
     
     Returns:
-        int: The generated number
+        int: Random integer in the range [1, 100]
     """
     num = random.randint(1, 100)  # NOSONAR
-    global ANSWER
-    ANSWER = num
     return num
 
 
@@ -58,12 +53,13 @@ def is_even(num):
     return True if num % 2 == 0 else False
 
 
-def answer_to_question():
-    """Provides the correct answer to the last generated question.
+def answer_to_question(question):
+    """Convert numeric question to game answer string.
     
-    Converts the boolean result from is_even() into 'yes' or 'no'.
+    Args:
+        question (int): The number to evaluate
     
     Returns:
-        str: 'yes' if the number is even, 'no' if odd
+        str: 'yes' if question is even, 'no' if odd
     """
-    return {True: 'yes', False: 'no'}[is_even(ANSWER)]
+    return {True: 'yes', False: 'no'}[is_even(question)]

@@ -1,59 +1,52 @@
-"""Greatest Common Divisor (GCD) Quiz Module.
+"""Greatest Common Divisor (GCD) Game Module.
  
-This module generates pairs of random numbers and calculates their GCD.
-It's designed for quiz systems where users need to find the GCD of two numbers.
- 
-The module provides:
-- Random number pair generation (1-100)
-- GCD calculation using Python's math.gcd()
-- Consistent answer storage between question generation and verification
- 
-Global Variables:
-    ANSWER (int|None): 
-        Stores the GCD of the last generated pair. Initialized as None.
- 
-Functions:
-    rule(): Prints the game instructions.
-    generate_question(): 
-        Generates a random number pair and calculates their GCD.
-    answer_to_question(): Returns the correct GCD answer.
+This module provides functionality for generating random
+GCD questions and calculating their solutions. It's designed
+for educational games or math practice tools where
+users find the greatest common divisor of two numbers.
 """
 import math
 import random
 
-ANSWER = None
+RULE = 'Find the greatest common divisor of given numbers.'
 
 
-def rule():
-    """Prints the game instructions.
+def question_and_answer():
+    """Generate a GCD question and its correct answer.
     
-    Explains to the user what mathematical operation they should perform.
+    Coordinates the question generation and answer calculation process.
+    
+    Returns:
+        tuple: (question, answer) where:
+            - question (str): Two numbers as
+                space-separated string (e.g., "12 18")
+            - answer (str): String representation of the GCD (e.g., "6")
     """
-    print('Find the greatest common divisor of given numbers.')
+    question = generate_question()
+    correct_answer = answer_to_question(question)
+    return question, correct_answer
 
 
 def generate_question():
-    """Generates a random number pair and calculates their GCD.
-    
-    Generates two random integers between 1 and 100, 
-    calculates their GCD using math.gcd(), stores the result
-    in the global ANSWER, and returns the number pair as a string.
+    """Generate two random numbers for GCD calculation.
     
     Returns:
-        str: The two generated numbers as
-             a space-separated string (e.g., "36 48")
+        str: Two space-separated integers between 1-100 (e.g., "24 36")
     """
     first_num = random.randint(1, 100)  # NOSONAR
     second_num = random.randint(1, 100)  # NOSONAR
-    global ANSWER
-    ANSWER = math.gcd(first_num, second_num)
     return f'{first_num} {second_num}'
 
 
-def answer_to_question():
-    """Provides the correct GCD answer for the last generated pair.
+def answer_to_question(question):
+    """Calculate the GCD of two numbers from a question string.
     
+    Args:
+        question (str): Two space-separated integers (e.g., "12 18")
+        
     Returns:
-        str: String representation of the stored GCD answer
+        str: GCD of the numbers as string
     """
-    return str(ANSWER)
+    first_num, second_num = question.split()
+    first_num, second_num = int(first_num), int(second_num)
+    return str(math.gcd(first_num, second_num))
