@@ -21,7 +21,7 @@ def question_and_answer():
             - answer: The correct missing element as a string
     """
     progression = generate_progression()
-    hidden_index = random.randint(1, len(progression) - 1)
+    hidden_index = random.randint(1, len(progression) - 1)  # NOSONAR
     hidden_element = progression[hidden_index]
     question = get_progression_string(progression, hidden_index)
     return question, str(hidden_element)
