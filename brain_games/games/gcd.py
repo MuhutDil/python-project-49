@@ -1,9 +1,9 @@
 """Greatest Common Divisor (GCD) Game Module.
  
-This module provides functionality for generating random
-GCD questions and calculating their solutions. It's designed
-for educational games or math practice tools where
-users find the greatest common divisor of two numbers.
+This module provides functionality for generating random GCD questions
+and calculating their solutions. It's designed for educational games
+or math practice tools where users find the greatest common divisor
+of two numbers.
 """
 import math
 import random
@@ -11,7 +11,7 @@ import random
 RULE = 'Find the greatest common divisor of given numbers.'
 
 
-def question_and_answer():
+def generate_game_conditions():
     """Generate a GCD question and its correct answer.
     
     Coordinates the question generation and answer calculation process.
@@ -23,7 +23,7 @@ def question_and_answer():
             - answer (str): String representation of the GCD (e.g., "6")
     """
     question = generate_question()
-    correct_answer = answer_to_question(question)
+    correct_answer = convert_to_answer(question)
     return question, correct_answer
 
 
@@ -38,7 +38,7 @@ def generate_question():
     return f'{first_num} {second_num}'
 
 
-def answer_to_question(question):
+def convert_to_answer(question):
     """Calculate the GCD of two numbers from a question string.
     
     Args:

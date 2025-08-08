@@ -10,13 +10,13 @@ import prompt
 MAX_CORRECT_ANSWERS = 3
 
 
-def game(rule, question_and_answer):
+def launch_game(game):
     """Main game engine that orchestrates the quiz gameplay.
     
     Args:
-        rule: Function that displays the game rules/instructions.
-        question_and_answer: Function that generates a question
-            and correct answer to the current question
+        game: Module containing game logic with:
+            - RULE: str (game rules)
+            - generate_game_conditions(): -> tuple(question, correct_answer)
         
     Workflow:
         1. Welcomes the user
@@ -34,9 +34,9 @@ def game(rule, question_and_answer):
     print('Welcome to the Brain Games!')
     name = prompt.string('May I have your name? ')
     print(f'Hello, {name}!')
-    print(rule)
+    print(game.RULE)
     for _ in range(MAX_CORRECT_ANSWERS):
-        question, correct_answer = question_and_answer()
+        question, correct_answer = game.generate_game_conditions()
         print(f'Question: {question}')
         user_answer = prompt.string('Your answer: ')
         if user_answer != correct_answer:

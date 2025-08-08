@@ -9,7 +9,7 @@ import random
 RULE = 'Answer "yes" if given number is prime. Otherwise answer "no".'
 
 
-def question_and_answer():
+def generate_game_conditions():
     """Generate a prime number identification question and its correct answer.
     
     Returns:
@@ -17,19 +17,9 @@ def question_and_answer():
             - question (int): A randomly generated number between 1-100
             - answer (str): 'yes' if prime, 'no' if not prime
     """
-    question = generate_question()
-    correct_answer = answer_to_question(question)
+    question = random.randint(1, 100)  # NOSONAR
+    correct_answer = convert_to_answer(question)
     return question, correct_answer
-
-
-def generate_question():
-    """Generate a random number for prime checking.
-    
-    Returns:
-        int: Random integer between 1 and 100 (inclusive)
-    """
-    num = random.randint(1, 100)  # NOSONAR
-    return num
 
 
 def is_prime(num):
@@ -52,7 +42,7 @@ def is_prime(num):
     return True
 
 
-def answer_to_question(question):
+def convert_to_answer(question):
     """Convert prime check result to game answer format.
     
     Args:

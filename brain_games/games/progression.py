@@ -1,8 +1,7 @@
 """Arithmetic progression game module.
  
-This module generates questions about missing elements
-in arithmetic progressions for use in math quiz games.
-It provides functionality to:
+This module generates questions about missing elements in arithmetic
+progressions for use in math quiz games. It provides functionality to:
 - Generate random arithmetic progressions
 - Hide a random element in the progression
 - Format the question and provide the correct answer
@@ -12,7 +11,7 @@ import random
 RULE = 'What number is missing in the progression?'
 
 
-def question_and_answer():
+def generate_game_conditions():
     """Generates a question about a missing progression element and its answer.
  
     Returns:
@@ -21,9 +20,9 @@ def question_and_answer():
             - answer: The correct missing element as a string
     """
     progression = generate_progression()
-    hidden_index = random.randint(1, len(progression) - 1)  # NOSONAR
-    hidden_element = progression[hidden_index]
-    question = get_progression_string(progression, hidden_index)
+    random_index = random.randint(1, len(progression) - 1)  # NOSONAR
+    hidden_element = progression[random_index]
+    question = generate_question(progression, random_index)
     return question, str(hidden_element)
 
 
@@ -39,7 +38,7 @@ def generate_progression():
     return [start + step * i for i in range(len_progression)]
 
 
-def get_progression_string(progression, hide_index):
+def generate_question(progression, hide_index):
     """Formats a progression as a string with one hidden element.
  
     Args:

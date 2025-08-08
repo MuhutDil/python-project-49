@@ -6,15 +6,15 @@ whether a randomly generated number is even or odd. It includes functions to:
 - Check even/odd status
 - Format game responses
  
-The main interface is the question_and_answer() function which returns a tuple
-of (question_number, correct_answer).
+The main interface is the generate_game_conditions() function
+which returns a tuple of (question, correct_answer).
 """
 import random
 
 RULE = 'Answer "yes" if the number is even, otherwise answer "no".'
 
 
-def question_and_answer():
+def generate_game_conditions():
     """Generate a random number question and its correct answer.
     
     This is the main game function that coordinates:
@@ -26,19 +26,9 @@ def question_and_answer():
             - question (int): Random number between 1-100
             - answer (str): 'yes' if even, 'no' if odd
     """
-    question = generate_question()
-    correct_answer = answer_to_question(question)
+    question = random.randint(1, 100)  # NOSONAR
+    correct_answer = convert_to_answer(question)
     return question, correct_answer
-
-
-def generate_question():
-    """Generate a random integer question between 1 and 100.
-    
-    Returns:
-        int: Random integer in the range [1, 100]
-    """
-    num = random.randint(1, 100)  # NOSONAR
-    return num
 
 
 def is_even(num):
@@ -53,7 +43,7 @@ def is_even(num):
     return True if num % 2 == 0 else False
 
 
-def answer_to_question(question):
+def convert_to_answer(question):
     """Convert numeric question to game answer string.
     
     Args:

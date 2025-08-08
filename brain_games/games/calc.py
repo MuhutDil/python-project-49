@@ -1,11 +1,14 @@
 """Arithmetic Expression Game Module.
  
-This module provides functionality for generating simple
-math expression questions and calculating their 
-correct answers. It supports three basic operations:
-addition (+), subtraction (-), and multiplication (*).
+This module provides functionality for generating simple math expression
+questions and calculating their correct answers. It supports three basic
+operations:
+addition (+),
+subtraction (-),
+multiplication (*).
  
-The main interface is question_and_answer() which returns a tuple containing:
+The main interface is generate_game_conditions() which returns
+a tuple containing:
 - A string math expression (e.g., "3 + 5")
 - The correct answer as a string (e.g., "8")
 """
@@ -14,7 +17,7 @@ import random
 RULE = 'What is the result of the expression?'
 
 
-def question_and_answer():
+def generate_game_conditions():
     """Generate a random arithmetic question and its correct answer.
     
     Coordinates the question generation and answer calculation process.
@@ -25,8 +28,8 @@ def question_and_answer():
             - answer (str): String representation of the correct result
     """
     question = generate_question()
-    correct_answer = answer_to_question(question)
-    return question, correct_answer
+    correct_answer = calculate_math_expression(question)
+    return question, str(correct_answer)
 
 
 def calculate_math_expression(expression):
@@ -64,15 +67,3 @@ def generate_question():
     second_num = random.randint(1, 50)  # NOSONAR
     operator = random.choice(operators)  # NOSONAR
     return f'{first_num} {operator} {second_num}'
-
-
-def answer_to_question(question):
-    """Convert a math question to its string answer.
-    
-    Args:
-        question (str): Math expression to evaluate
-        
-    Returns:
-        str: String representation of the answer
-    """
-    return str(calculate_math_expression(question))
